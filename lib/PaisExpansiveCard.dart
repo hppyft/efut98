@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutterapp/EquipeCard.dart';
+import 'package:flutterapp/Model.dart';
 
-class _ExpansiveCardState extends State<ExpansiveCard> {
-  _ExpansiveCardState({@required this.times, @required this.onPressed});
+class _PaisExpansiveCardState extends State<PaisExpansiveCard> {
+  _PaisExpansiveCardState({@required this.pais, @required this.onPressed});
 
   GestureTapCallback onPressed;
-  int times;
+  SelectablePais pais;
   IconData iconData = Icons.keyboard_arrow_down;
   bool isExpanded = false;
 
@@ -22,9 +24,16 @@ class _ExpansiveCardState extends State<ExpansiveCard> {
 
   Widget _expand(bool isExpanded, GestureTapCallback onPressed) {
     if (isExpanded) {
-      return ExpansiveCard(
-        times: 5,
-        onPressed: onPressed,
+      return ListView.builder(
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
+        itemBuilder: (context, position) {
+          return EquipeCard(
+            equipe: pais.equipeList[position],
+            onPressed: onPressed,
+          );
+        },
+        itemCount: pais.equipeList.length,
       );
     } else {
       return Padding(padding: EdgeInsets.all(0.0));
@@ -51,12 +60,12 @@ class _ExpansiveCardState extends State<ExpansiveCard> {
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: <Widget>[
-                    Image.asset('assets/images/brazil.png'),
+                    Image.asset(pais.flagPath),
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 0.0, horizontal: 8.0),
                       child: Text(
-                        "Brasil",
+                        pais.name,
                         style: Theme.of(context).textTheme.body1,
                       ),
                     ),
@@ -66,7 +75,7 @@ class _ExpansiveCardState extends State<ExpansiveCard> {
                       padding: const EdgeInsets.symmetric(
                           vertical: 0.0, horizontal: 8.0),
                       child: Text(
-                        "$times times",
+                        "${pais.equipeList.length} times",
                         style: Theme.of(context).textTheme.body1,
                       ),
                     ),
@@ -95,13 +104,13 @@ class _ExpansiveCardState extends State<ExpansiveCard> {
   }
 }
 
-class ExpansiveCard extends StatefulWidget {
-  ExpansiveCard({@required this.times, @required this.onPressed});
+class PaisExpansiveCard extends StatefulWidget {
+  PaisExpansiveCard({@required this.pais, @required this.onPressed});
 
   final GestureTapCallback onPressed;
-  final int times;
+  final SelectablePais pais;
 
   @override
-  _ExpansiveCardState createState() =>
-      _ExpansiveCardState(times: times, onPressed: onPressed);
+  _PaisExpansiveCardState createState() =>
+      _PaisExpansiveCardState(pais: pais, onPressed: onPressed);
 }
