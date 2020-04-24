@@ -3,10 +3,24 @@ import 'package:flutter/foundation.dart';
 import 'package:flutterapp/Model.dart';
 
 class _EquipeCardState extends State<EquipeCard> {
-  _EquipeCardState({@required this.equipe, @required this.onPressed});
+  _EquipeCardState({@required this.equipe, @required this.equipeCallback});
 
-  GestureTapCallback onPressed;
+  final void Function(SelectableEquipe) equipeCallback;
   SelectableEquipe equipe;
+
+  void _onEquipeClicked() {
+    setState(() {
+      equipeCallback(equipe);
+    });
+  }
+
+  Color _getColor() {
+    if (equipe.selected) {
+      return Colors.green;
+    } else {
+      return Colors.greenAccent;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +30,10 @@ class _EquipeCardState extends State<EquipeCard> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16.0),
         ),
-        color: Colors.lightGreenAccent,
+        color: _getColor(),
         child: InkWell(
           borderRadius: BorderRadius.all(Radius.circular(16.0)),
-          onTap: onPressed,
+          onTap: _onEquipeClicked,
           child: Column(
             children: <Widget>[
               Padding(
@@ -49,12 +63,12 @@ class _EquipeCardState extends State<EquipeCard> {
 }
 
 class EquipeCard extends StatefulWidget {
-  EquipeCard({@required this.equipe, @required this.onPressed});
+  EquipeCard({@required this.equipe, @required this.equipeCallback});
 
-  final GestureTapCallback onPressed;
+  final void Function(SelectableEquipe) equipeCallback;
   final SelectableEquipe equipe;
 
   @override
   _EquipeCardState createState() =>
-      _EquipeCardState(equipe: equipe, onPressed: onPressed);
+      _EquipeCardState(equipe: equipe, equipeCallback: equipeCallback);
 }

@@ -30,15 +30,15 @@ class _MyHomePageState extends State<MyHomePage> {
   int _equipes_counter = 0;
   int _paises_counter = 0;
 
-  void _incrementEquipesCounter(int increment) {
+  void _modifyEquipesCounter(int mod) {
     setState(() {
-      _equipes_counter += increment;
+      _equipes_counter += mod;
     });
   }
 
-  void _incrementPaisesCounter() {
+  void _modifyPaisesCounter(int mod) {
     setState(() {
-      _paises_counter++;
+      _paises_counter += mod;
     });
   }
 
@@ -46,13 +46,28 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     //TODO retirar dummy data
     SelectableEquipe equipe = SelectableEquipe(
-        name: 'Flamengo', flagPath: 'assets/images/flamengo_flag.png');
+        name: 'Flamengo',
+        flagPath: 'assets/images/flamengo_flag.png',
+        selected: false);
     SelectableEquipe equipe2 = SelectableEquipe(
-        name: 'Flamengo', flagPath: 'assets/images/flamengo_flag.png');
-    List<SelectableEquipe> list = [equipe, equipe2];
+        name: 'Flamengo',
+        flagPath: 'assets/images/flamengo_flag.png',
+        selected: false);
+    SelectableEquipe equipe3 = SelectableEquipe(
+        name: 'Flamengo',
+        flagPath: 'assets/images/flamengo_flag.png',
+        selected: false);
     SelectablePais brasil = SelectablePais(
-        flagPath: 'assets/images/brazil.png', name: 'Brasil', equipeList: list);
-    List<SelectablePais> paises = [brasil, brasil];
+        flagPath: 'assets/images/brazil.png',
+        name: 'Brasil',
+        equipeList: [equipe, equipe2],
+        selected: false);
+    SelectablePais brasil2 = SelectablePais(
+        flagPath: 'assets/images/brazil.png',
+        name: 'Brasil',
+        equipeList: [equipe3],
+        selected: false);
+    List<SelectablePais> paises = [brasil, brasil2];
 
     ListView listView = ListView.builder(
       scrollDirection: Axis.vertical,
@@ -60,7 +75,8 @@ class _MyHomePageState extends State<MyHomePage> {
       itemBuilder: (context, position) {
         return PaisExpansiveCard(
           pais: paises[position],
-          onPressed: _incrementPaisesCounter,
+          equipesCallback: _modifyEquipesCounter,
+          paisesCallback: _modifyPaisesCounter,
         );
       },
       itemCount: paises.length,
