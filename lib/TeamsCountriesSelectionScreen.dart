@@ -2,31 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutterapp/Model.dart';
 import 'PaisExpansiveCard.dart';
 
-void main() => runApp(MyApp());
+class TeamsCountriesSelectionScreen extends StatefulWidget {
+  TeamsCountriesSelectionScreen({Key key}) : super(key: key);
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'CoronaFut',
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-      ),
-      home: MyHomePage(title: 'Seleção de times'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _TeamsCountriesSelectionScreenState createState() => _TeamsCountriesSelectionScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _TeamsCountriesSelectionScreenState extends State<TeamsCountriesSelectionScreen> {
   int _equipes_counter = 0;
   int _paises_counter = 0;
 
@@ -84,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text("Seleção de times"),
       ),
       body: Column(
         children: <Widget>[

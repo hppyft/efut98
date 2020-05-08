@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:tuple/tuple.dart';
 
 class SelectableEquipe extends DefaultSelectable {
   SelectableEquipe({String flagPath, String name, bool selected})
@@ -70,4 +70,9 @@ class DefaultSelectable {
   String flagPath;
   String name;
   bool selected;
+}
+
+class GameFile{
+  String year;
+  List<Tuple2<String,String>> coachAndTeams;
 }
