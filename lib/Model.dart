@@ -53,15 +53,15 @@ class SelectablePais extends DefaultSelectable {
     return deselected;
   }
 
-//  bool isAllDeselected() {
-//    bool isAllDeselected = true;
-//    equipeList.forEach((SelectableEquipe equipe) {
-//      if (equipe.selected) {
-//        isAllDeselected = false;
-//      }
-//    });
-//    return isAllDeselected;
-//  }
+  bool isAllDeselected() {
+    bool isAllDeselected = true;
+    equipeList.forEach((SelectableEquipe equipe) {
+      if (equipe.selected) {
+        isAllDeselected = false;
+      }
+    });
+    return isAllDeselected;
+  }
 }
 
 class DefaultSelectable {

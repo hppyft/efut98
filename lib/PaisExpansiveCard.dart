@@ -47,19 +47,19 @@ class _PaisExpansiveCardState extends State<PaisExpansiveCard> {
   void _onEquipeClicked(SelectableEquipe equipe) {
     setState(() {
       if (equipe.selected) {
-        if (pais.isAllSelected()) {
+        equipe.selected = !equipe.selected;
+        equipesCallback(-1);
+        if(pais.isAllDeselected()){
           pais.selected = false;
           paisesCallback(-1);
         }
-        equipe.selected = !equipe.selected;
-        equipesCallback(-1);
       } else{
-        equipe.selected = !equipe.selected;
-        equipesCallback(1);
-        if (pais.isAllSelected()) {
+        if(pais.isAllDeselected()){
           pais.selected = true;
           paisesCallback(1);
         }
+        equipe.selected = !equipe.selected;
+        equipesCallback(1);
       }
     });
   }
